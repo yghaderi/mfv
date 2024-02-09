@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional
 from pydantic import BaseModel, PositiveInt
 
 
@@ -20,3 +20,28 @@ class InventoryManagementApproach(BaseModel):
     """
 
     approach: Literal[1, 2, 3, 4, 5, 6]
+
+
+class ProductionFlow(BaseModel):
+    """
+    Parameters
+    ---------
+    id: int
+        کد محصول
+    year: int
+        سال
+    capacity: int
+        ظرفیتِ تولید
+    qty: int
+        مقدار تولید
+    pct_export: Optional[float] = 0
+        درصد فروشِ صادراتی از کل
+    pct_commission_prod: Optional[float] = 0
+        درصدِ تولیدِ کارمزدی از کل
+    """
+    id: int
+    year: int
+    capacity: int
+    qty: int
+    pct_export: Optional[float] = 0
+    pct_commission_prod: Optional[float] = 0

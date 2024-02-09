@@ -1,11 +1,28 @@
 from typing import List, Optional
 import polars as pl
-from mfv.meta import Year
+from mfv.models import Year
 
 
 def change_factor(
     year: Year, normal_rate: float, extra_rate: Optional[List[float]] = None
 ):
+    """
+    ..raw: html
+        <div></div>
+
+    Parameters
+    ----------
+    year: Year
+        سالِ شروع و طولِ دوره
+    normal_rate: float
+        نرخِ تغییرِ عادی
+    extra_rate: float
+        نرخِ تغییرِ فرا-معمول
+
+    Returns
+    --------
+    polars.DataFrame
+    """
     year = Year(**year) if isinstance(year, dict) else year
     df = pl.DataFrame(
         {
