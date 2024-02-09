@@ -1,8 +1,13 @@
 from typing import Literal
-from pydantic import BaseModel
+from pydantic import BaseModel, PositiveInt
 
 
-class InventoryManagement(BaseModel):
+class Year(BaseModel):
+    start: int
+    length: PositiveInt
+
+
+class InventoryManagementApproach(BaseModel):
     """
     approach {
         1: 'خریدِ کسری و فروشِ مازاد'
@@ -13,4 +18,5 @@ class InventoryManagement(BaseModel):
         6: 'محدودیتِ فروش-مصرف'
         }
     """
+
     approach: Literal[1, 2, 3, 4, 5, 6]
