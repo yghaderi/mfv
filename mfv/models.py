@@ -24,6 +24,12 @@ class InventoryManagementApproach(BaseModel):
 
 class ProductionFlow(BaseModel):
     """
+    .. raw:: html
+
+        <div dir="rtl">
+         جریانِ تولید
+        </div>
+
     Parameters
     ---------
     id: int
@@ -59,7 +65,9 @@ class Input(BaseModel):
     Parameters
     -------
     id: int
-        شناسه
+        شناسه‌یِ نهاده
+    cost_center_id: int
+        شناسه‌یث مرکزِ هزینه
     name: str
         نامِ نهاده
     unit: int
@@ -67,8 +75,94 @@ class Input(BaseModel):
     value: float
         مقدار
     """
+
     id: int
+    cost_center_id: int
     name: str
-    unit: int
+    unit: str
     value: float
 
+
+##########################################
+# Hypothesis
+class CostingMethod(BaseModel):
+    method: Literal["variable", "absorption"]
+
+
+class InputOutputRate(BaseModel):
+    """
+    .. raw:: html
+
+        <div dir="rtl">
+         نرخ های اصلیِ بازارهای نهاده و ستاده
+        </div>
+    """
+
+    id: int
+    name: str
+    unit: str
+    value: float
+
+
+class Weight(BaseModel):
+    """
+    .. raw:: html
+
+        <div dir="rtl">
+         فرض‌های فنیِ بازدهِ وزنی
+        </div>
+    """
+
+    id: int
+    name: str
+    weight: float
+
+
+class MainAssumption(BaseModel):
+    """
+    .. raw:: html
+
+        <div dir="rtl">
+         فرض‌های اصلی
+        </div>
+    """
+
+    id: int
+    name: str
+    unit: str
+    value: float
+
+
+class FinancialRatio(BaseModel):
+    """
+    .. raw:: html
+
+        <div dir="rtl">
+         هدف های مربوط به منبع‌ها و مصرف‌های مالی
+        </div>
+
+    Parameters
+    ----------
+    id: int
+        شناسه
+    name: str
+        نام
+    current_value: float
+        مقدارِ فعلی
+    target_value: float
+        مقدارِ هدف
+    begin_improvement_at: int
+        سالِ آغازِ بهبود
+    mature_year: int
+        سالِ بلوغ
+    method: str
+        روشِ تغییر
+    """
+
+    id: int
+    name: str
+    current_value: float
+    target_value: float
+    begin_improvement_at: int
+    mature_year: int
+    method: str
