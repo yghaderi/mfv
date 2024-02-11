@@ -1,5 +1,5 @@
 from typing import Literal, Optional
-from pydantic import BaseModel, PositiveInt
+from pydantic import BaseModel, PositiveInt, model_validator
 
 
 class Year(BaseModel):
@@ -39,9 +39,36 @@ class ProductionFlow(BaseModel):
     pct_commission_prod: Optional[float] = 0
         درصدِ تولیدِ کارمزدی از کل
     """
+
     id: int
     year: int
     capacity: int
     qty: int
     pct_export: Optional[float] = 0
     pct_commission_prod: Optional[float] = 0
+
+
+class Input(BaseModel):
+    """
+    .. raw:: html
+
+        <div dir="rtl">
+         مدلِ نهاده‌ها
+        </div>
+
+    Parameters
+    -------
+    id: int
+        شناسه
+    name: str
+        نامِ نهاده
+    unit: int
+        واحدِ اندازه-گیری
+    value: float
+        مقدار
+    """
+    id: int
+    name: str
+    unit: int
+    value: float
+
