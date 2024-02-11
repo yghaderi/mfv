@@ -83,7 +83,7 @@ class Input(BaseModel):
     value: float
 
 
-##########################################
+###############################################################################
 # Hypothesis
 class CostingMethod(BaseModel):
     method: Literal["variable", "absorption"]
@@ -163,6 +163,28 @@ class FinancialRatio(BaseModel):
     name: str
     current_value: float
     target_value: float
-    begin_improvement_at: int
+    begin_improvement_year: int
     mature_year: int
     method: str
+
+
+###############################################################################
+# *********
+class Inventory(BaseModel):
+    id: int
+    name: str
+    unit: str
+    management_approach: InventoryManagementApproach
+    quantity: int
+    value: int
+    year: int
+    beginning: bool
+    current_turnover: float
+    target_turnover: float
+    begin_improvement_year: int
+    mature_year: int
+
+
+class InputType(BaseModel):
+    id: int
+    name: str
