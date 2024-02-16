@@ -1,4 +1,4 @@
-from typing import Literal, Optional
+from typing import Literal, Optional, List
 from pydantic import BaseModel, PositiveInt, model_validator
 
 
@@ -31,18 +31,25 @@ class InventoryManagementApproach(BaseModel):
     approach: Literal[1, 2, 3, 4, 5, 6]
 
 
+class CostAllocation(BaseModel):
+    cost_center_id: int
+    type: Literal["fixed", "variable"]
+    ratio: float
+
+
 class FixedAsset(BaseModel):
     id: int
     name: str
-    book_value: int
-    useful_life: int
+    book_value: PositiveInt
+    useful_life: PositiveInt
     salvage_value: int
     accumulated_depreciation: int
+    depreciation: int = 0
     maintenance: int
-    depreciation: Literal[
+    depreciation_method: Literal[
         "straight_line", "declining_balance", "double_declining_balance"
     ]
-    cost_center: int
+    cost_allocation: List[CostAllocation]
 
 
 class ProductionFlow(BaseModel):
