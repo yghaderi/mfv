@@ -2,9 +2,18 @@ from typing import Literal, Optional
 from pydantic import BaseModel, PositiveInt, model_validator
 
 
-class Year(BaseModel):
-    start: int
+class Company(BaseModel):
+    id: int
+    name: str
+
+
+class FinancialYear(BaseModel):
+    start: PositiveInt
     length: PositiveInt
+
+
+class CostingMethod(BaseModel):
+    method: Literal["variable", "absorption"]
 
 
 class InventoryManagementApproach(BaseModel):
@@ -20,6 +29,20 @@ class InventoryManagementApproach(BaseModel):
     """
 
     approach: Literal[1, 2, 3, 4, 5, 6]
+
+
+class FixedAsset(BaseModel):
+    id: int
+    name: str
+    book_value: int
+    useful_life: int
+    salvage_value: int
+    accumulated_depreciation: int
+    maintenance: int
+    depreciation: Literal[
+        "straight_line", "declining_balance", "double_declining_balance"
+    ]
+    cost_center: int
 
 
 class ProductionFlow(BaseModel):
@@ -81,12 +104,6 @@ class Input(BaseModel):
     name: str
     unit: str
     value: float
-
-
-###############################################################################
-# Hypothesis
-class CostingMethod(BaseModel):
-    method: Literal["variable", "absorption"]
 
 
 class InputOutputRate(BaseModel):
@@ -151,7 +168,7 @@ class FinancialRatio(BaseModel):
         مقدارِ فعلی
     target_value: float
         مقدارِ هدف
-    begin_improvement_at: int
+    begin_improvement_year: int
         سالِ آغازِ بهبود
     mature_year: int
         سالِ بلوغ
